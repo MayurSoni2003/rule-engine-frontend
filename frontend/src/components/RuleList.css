@@ -1,0 +1,53 @@
+/* Add horizontal styling to RuleForm */
+.rule-form {
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    align-items: center;
+}
+
+.rule-form h3 {
+    flex: 1;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.rule-form form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.rule-form .form-group {
+    width: 45%;
+    margin-bottom: 15px;
+}
+
+.rule-form input,
+.rule-form select {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.rule-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+    flex-shrink: 0;
+}
+
+.rule-form button:hover {
+    background-color: #45a049;
+}
