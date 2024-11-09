@@ -45,7 +45,14 @@ def update_rule(rule_id):
 @app.route('/api/rules/<int:rule_id>', methods=['DELETE'])
 def delete_rule(rule_id):
     rules = load_rules()
+    
+    # Filter out the rule to delete
     rules = [rule for rule in rules if rule['id'] != rule_id]
+    
+    # Renumber remaining rules
+    for i, rule in enumerate(rules, start=1):
+        rule['id'] = i
+    
     save_rules(rules)
     return '', 204
 

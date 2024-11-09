@@ -7,5 +7,32 @@
         "protocol": "udp",
         "source_ip": "75.212.45.78",
         "source_port": "2555"
+    },
+    {
+        "source_ip": "4234",
+        "destination_ip": "4324",
+        "source_port": "2343",
+        "destination_port": "324234",
+        "protocol": "icmp",
+        "action": "DENY",
+        "id": 2
+    },
+    {
+        "source_ip": "e324",
+        "destination_ip": "234",
+        "source_port": "234",
+        "destination_port": "234",
+        "protocol": "",
+        "action": "DENY",
+        "id": 3
+    },
+    {
+        "source_ip": "234",
+        "destination_ip": "432",
+        "source_port": "234",
+        "destination_port": "432",
+        "protocol": "udp",
+        "action": "ALLOW",
+        "id": 4
     }
 ]

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RuleForm from './RuleForm';
@@ -13,10 +12,10 @@ function RuleList() {
     useEffect(() => {
         axios.get('http://localhost:5000/api/rules')
             .then(response => setRules(response.data))
-            .catch(error => setMessage('Error fetching rules'));
+            .catch(() => setMessage('Error fetching rules'));
     }, [rules]);
 
-    // Delete a rule
+    // Delete a rule with confirmation and renumbering
     const deleteRule = (id) => {
         if (window.confirm("Are you sure you want to delete this rule?")) {
             axios.delete(`http://localhost:5000/api/rules/${id}`)
@@ -31,16 +30,14 @@ function RuleList() {
 
     // Set the rule to be edited
     const editRule = (rule) => {
-        setEditingRule(rule); // Set the rule to be edited
+        setEditingRule(rule);
     };
 
     return (
         <div>
             <h2>Firewall Rules</h2>
-            {/* Horizontal form */}
             <RuleForm editingRule={editingRule} setEditingRule={setEditingRule} setMessage={setMessage} />
 
-            {/* Vertical list of rules */}
             <div className="rules-list">
                 {rules.length === 0 && <p>No rules available</p>}
                 {rules.map(rule => (
