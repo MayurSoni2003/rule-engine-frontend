@@ -1,11 +1,11 @@
 [
     {
-        "source_ip": "75.212.45.78",
-        "destination_ip": "85.322",
-        "source_port": "2555",
-        "destination_port": "585",
-        "protocol": "udp",
         "action": "ALLOW",
-        "id": 1
+        "destination_ip": "85.322",
+        "destination_port": "585",
+        "id": 1,
+        "protocol": "udp",
+        "source_ip": "75.212.45.78",
+        "source_port": "2555"
     }
 ]

@@ -18,13 +18,15 @@ function RuleList() {
 
     // Delete a rule
     const deleteRule = (id) => {
-        axios.delete(`http://localhost:5000/api/rules/${id}`)
-            .then(() => {
-                setMessage('Rule deleted successfully');
-            })
-            .catch(() => {
-                setMessage('Error deleting rule');
-            });
+        if (window.confirm("Are you sure you want to delete this rule?")) {
+            axios.delete(`http://localhost:5000/api/rules/${id}`)
+                .then(() => {
+                    setMessage('Rule deleted successfully');
+                })
+                .catch(() => {
+                    setMessage('Error deleting rule');
+                });
+        }
     };
 
     // Set the rule to be edited
