@@ -1,0 +1,86 @@
+[
+    {
+        "message": "[2024-11-07 20:19:33] Starting firewall..."
+    },
+    {
+        "message": "[2024-11-07 20:20:08] Packet {'source_ip': '192.168.30.143', 'destination_ip': '172.217.167.238', 'source_port': 41998, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:08] Packet {'source_ip': '192.168.30.143', 'destination_ip': '172.217.167.238', 'source_port': 42002, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:09] Packet {'source_ip': '192.168.30.143', 'destination_ip': '20.189.173.28', 'source_port': 55444, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:09] Packet {'source_ip': '192.168.30.143', 'destination_ip': '20.189.173.28', 'source_port': 55450, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:11] Packet {'source_ip': '192.168.30.143', 'destination_ip': '20.189.173.28', 'source_port': 55452, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:33] Packet {'source_ip': '192.168.30.143', 'destination_ip': '52.22.248.30', 'source_port': 57492, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:35] Packet {'source_ip': '192.168.30.143', 'destination_ip': '192.168.30.39', 'source_port': 35574, 'destination_port': 80, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:35] Packet {'source_ip': '192.168.30.143', 'destination_ip': '192.168.30.39', 'source_port': 39216, 'destination_port': 80, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:41] Packet {'source_ip': '192.168.30.143', 'destination_ip': '172.217.167.238', 'source_port': 36688, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:43] Packet {'source_ip': '192.168.30.143', 'destination_ip': '18.164.188.39', 'source_port': 58640, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:44] Packet {'source_ip': '192.168.30.143', 'destination_ip': '18.164.188.39', 'source_port': 58650, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:44] Packet {'source_ip': '192.168.30.143', 'destination_ip': '18.164.188.39', 'source_port': 58658, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:44] Packet {'source_ip': '192.168.30.143', 'destination_ip': '18.164.188.39', 'source_port': 58666, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:44] Packet {'source_ip': '192.168.30.143', 'destination_ip': '34.201.179.13', 'source_port': 57742, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:44] Packet {'source_ip': '192.168.30.143', 'destination_ip': '34.201.179.13', 'source_port': 57752, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:20:47] Packet {'source_ip': '192.168.30.143', 'destination_ip': '34.201.179.13', 'source_port': 59282, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:21:00] Packet {'source_ip': '192.168.30.143', 'destination_ip': '172.217.167.238', 'source_port': 35938, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:21:10] Packet {'source_ip': '192.168.30.143', 'destination_ip': '216.58.200.206', 'source_port': 55600, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:21:17] Packet {'source_ip': '192.168.30.143', 'destination_ip': '44.228.167.250', 'source_port': 46286, 'destination_port': 80, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:21:18] Packet {'source_ip': '192.168.30.143', 'destination_ip': '44.228.167.250', 'source_port': 46302, 'destination_port': 80, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:21:34] Packet {'source_ip': '192.168.30.143', 'destination_ip': '216.58.200.206', 'source_port': 60886, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:21:43] Packet {'source_ip': '192.168.30.143', 'destination_ip': '52.22.248.30', 'source_port': 60400, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:21:55] Packet {'source_ip': '192.168.30.143', 'destination_ip': '95.216.195.133', 'source_port': 42758, 'destination_port': 80, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:22:09] Packet {'source_ip': '192.168.30.143', 'destination_ip': '54.192.142.128', 'source_port': 59382, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:22:11] Packet {'source_ip': '192.168.30.143', 'destination_ip': '172.64.155.209', 'source_port': 52770, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:22:11] Packet {'source_ip': '192.168.30.143', 'destination_ip': '172.64.155.209', 'source_port': 52774, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
+    },
+    {
+        "message": "[2024-11-07 20:22:15] Stopping firewall..."
+    }
+]

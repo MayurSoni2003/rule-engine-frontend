@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RuleForm from './RuleForm';
-import './RuleList.css';
+import './css/RuleList.css';
 
 function RuleList() {
     const [rules, setRules] = useState([]);

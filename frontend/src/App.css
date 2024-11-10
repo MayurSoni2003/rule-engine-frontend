@@ -157,3 +157,28 @@ button:disabled {
   font-size: 1rem;
   margin-top: 10px;
 }
+
+/* Navigation Bar Styles */
+nav {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+nav a {
+  color: white;
+  font-size: 1.1rem;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #45a049;
+}
+
+nav a.active {
+  background-color: #388e3c;
+}

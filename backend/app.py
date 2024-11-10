@@ -17,6 +17,11 @@ def save_rules(rules):
     with open('rules.json', 'w') as f:
         json.dump(rules, f, indent=4)
 
+# Load logs from JSON
+# def load_logs():
+#     with open('logs.json', 'r') as f:
+#         return json.load(f)
+
 @app.route('/api/rules', methods=['GET'])
 def get_rules():
     rules = load_rules()
@@ -55,6 +60,14 @@ def delete_rule(rule_id):
     
     save_rules(rules)
     return '', 204
+
+
+@app.route('/api/logs', methods=['GET'])
+def get_logs():
+    # Replace 'logs.json' with the actual file or method where logs are stored
+    with open('logs.json', 'r') as f:
+        logs = json.load(f)
+    return jsonify(logs)
 
 if __name__ == '__main__':
     app.run(debug=True)
