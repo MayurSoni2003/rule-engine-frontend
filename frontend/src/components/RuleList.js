@@ -21,8 +21,6 @@ function RuleList() {
             axios.delete(`http://localhost:5000/api/rules/${id}`)
                 .then(() => {
                     setMessage('Rule deleted successfully');
-                    // Remove the deleted rule from the state directly
-                    setRules(prevRules => prevRules.filter(rule => rule._id !== id));
                 })
                 .catch(() => {
                     setMessage('Error deleting rule');

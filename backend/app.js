@@ -46,12 +46,11 @@ app.get('/api/rules', async (req, res) => {
 // Add a new rule to MongoDB
 app.post('/api/rules', async (req, res) => {
     try {
-        const latestRule = await Rule.find().sort({ id: -1 }).limit(1);
-        const newId = latestRule.length > 0 ? latestRule[0].id + 1 : 1;
-        const newRule = new Rule({ ...req.body, id: newId });
+        const newRule = new Rule(req.body); // Use request body directly
         await newRule.save();
         res.status(201).json(newRule);
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: 'Failed to add rule' });
     }
 });
