@@ -16,5 +16,14 @@
         "protocol": "TCP",
         "action": "ALLOW",
         "id": 2
+    },
+    {
+        "source_ip": "10.2.15.9",
+        "destination_ip": "216.239.38.10",
+        "source_port": "34",
+        "destination_port": "443",
+        "protocol": "TCP",
+        "action": "DENY",
+        "id": 3
     }
 ]

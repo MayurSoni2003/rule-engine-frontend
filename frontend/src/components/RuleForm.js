@@ -65,7 +65,7 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
             destination_ip,
             source_port,
             destination_port,
-            protocol,
+            protocol: protocol || 'Any',
             action,
         };
 

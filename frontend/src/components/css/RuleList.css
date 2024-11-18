@@ -51,3 +51,28 @@
 .rule-form button:hover {
     background-color: #45a049;
 }
+
+
+
+.rules-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Creates 3 equal columns */
+    gap: 20px;
+    /* Adds space between the cards */
+    width: 100%;
+    margin-top: 20px;
+}
+
+.card {
+    width: 100%;
+    /* Ensures the cards adapt to the grid's column width */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
