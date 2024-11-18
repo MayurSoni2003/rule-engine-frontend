@@ -71,7 +71,7 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
 
         if (editingRule) {
             axios
-                .put(`http://localhost:5000/api/rules/${editingRule.id}`, newRule)
+                .put(`http://localhost:5000/api/rules/${editingRule._id}`, newRule)
                 .then(() => {
                     setMessage('Rule updated successfully');
                     setEditingRule(null);
