@@ -22,7 +22,7 @@
         "destination_ip": "216.239.38.10",
         "source_port": "34",
         "destination_port": "443",
-        "protocol": "TCP",
+        "protocol": "UDP",
         "action": "DENY",
         "id": 3
     }

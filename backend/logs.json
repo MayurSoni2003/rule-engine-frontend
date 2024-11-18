@@ -1,8 +1,5 @@
 [
     {
-        "message": "[2024-11-07 20:19:33] Starting firewall..."
-    },
-    {
         "message": "[2024-11-07 20:20:08] Packet {'source_ip': '192.168.30.12', 'destination_ip': '172.217.167.238', 'source_port': 41998, 'destination_port': 443, 'protocol': 'TCP'} action: DENY"
     },
     {
@@ -79,8 +76,5 @@
     },
     {
         "message": "[2024-11-07 20:22:11] Packet {'source_ip': '192.168.30.143', 'destination_ip': '172.64.155.209', 'source_port': 52774, 'destination_port': 443, 'protocol': 'ARP'} action: DENY"
-    },
-    {
-        "message": "[2024-11-07 20:22:15] Stopping firewall..."
     }
 ]
