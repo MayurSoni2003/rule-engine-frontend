@@ -8,19 +8,21 @@ function RuleList() {
     const [message, setMessage] = useState('');
     const [editingRule, setEditingRule] = useState(null);
 
-    // Fetch rules from the backend
+    // Fetch rules from the backend (only once when the component mounts)
     useEffect(() => {
         axios.get('http://localhost:5000/api/rules')
             .then(response => setRules(response.data))
             .catch(() => setMessage('Error fetching rules'));
-    }, [rules]);
+    }, []); // Empty dependency array to fetch only on component mount
 
-    // Delete a rule with confirmation and renumbering
+    // Delete a rule with confirmation and direct state update
     const deleteRule = (id) => {
         if (window.confirm("Are you sure you want to delete this rule?")) {
             axios.delete(`http://localhost:5000/api/rules/${id}`)
                 .then(() => {
                     setMessage('Rule deleted successfully');
+                    // Remove the deleted rule from the state directly
+                    setRules(prevRules => prevRules.filter(rule => rule._id !== id));
                 })
                 .catch(() => {
                     setMessage('Error deleting rule');
@@ -41,8 +43,8 @@ function RuleList() {
             <div className="rules-list">
                 {rules.length === 0 && <p>No rules available</p>}
                 {rules.map(rule => (
-                    <div key={rule.id} className="card">
-                        <div className="card-header">{`Rule #${rule.id}`}</div>
+                    <div key={rule._id} className="card">
+                        <div className="card-header">{`Rule #${rule._id}`}</div>
                         <div className="card-content">
                             <p><strong>Source IP:</strong> {rule.source_ip}</p>
                             <p><strong>Destination IP:</strong> {rule.destination_ip}</p>
@@ -53,7 +55,7 @@ function RuleList() {
                         </div>
                         <div className="card-actions">
                             <button onClick={() => editRule(rule)}>Edit</button>
-                            <button onClick={() => deleteRule(rule.id)}>Delete</button>
+                            <button onClick={() => deleteRule(rule._id)}>Delete</button> {/* Use _id here */}
                         </div>
                     </div>
                 ))}
