@@ -1,7 +1,61 @@
-/* .analytics-container {
+/* Analytics.css */
+
+/* Container for the entire analytics page */
+.analytics-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
     padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Header Styling */
 .analytics-container h2 {
     text-align: center;
-} */
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Title for each chart */
+.analytics-container h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Chart containers */
+.chart-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+/* Styling for Bar and Pie charts */
+.chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+}
+
+/* Responsive Design: Make the charts fit better on smaller screens */
+@media (max-width: 768px) {
+    .chart-container {
+        width: 90%;
+    }
+
+    .analytics-container h2 {
+        font-size: 2rem;
+    }
+
+    .analytics-container h3 {
+        font-size: 1.5rem;
+    }
+}
