@@ -1,80 +1,98 @@
-// Import required modules
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
+const mongoose = require('mongoose');
 
+// Initialize Express app
 const app = express();
 app.use(cors()); // Enable CORS
 app.use(express.json()); // Parse JSON bodies
 
-// Load rules from JSON
-const loadRules = () => {
-    const data = fs.readFileSync('rules.json', 'utf-8');
-    return JSON.parse(data);
-};
+// MongoDB connection setup
+const mongoURI = 'mongodb://localhost:27017/firewall'; // Replace with your MongoDB connection string
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.log(err));
 
-// Save rules to JSON
-const saveRules = (rules) => {
-    fs.writeFileSync('rules.json', JSON.stringify(rules, null, 4), 'utf-8');
-};
-
-// Load logs from JSON
-const loadLogs = () => {
-    const data = fs.readFileSync('logs.json', 'utf-8');
-    return JSON.parse(data);
-};
-
-// Get all rules
-app.get('/api/rules', (req, res) => {
-    const rules = loadRules();
-    res.json(rules);
+// Define the Rule schema and model
+const ruleSchema = new mongoose.Schema({
+    source_ip: String,
+    destination_ip: String,
+    source_port: Number,
+    destination_port: Number,
+    protocol: String,
+    action: String,
+    created_at: { type: Date, default: Date.now }
 });
 
-// Add a new rule
-app.post('/api/rules', (req, res) => {
-    const rules = loadRules();
-    const newRule = req.body;
-    newRule.id = rules.length > 0 ? Math.max(...rules.map((r) => r.id)) + 1 : 1;
-    rules.push(newRule);
-    saveRules(rules);
-    res.status(201).json(newRule);
+const logSchema = new mongoose.Schema({
+    message: String,
+    timestamp: { type: Date, default: Date.now }
 });
 
-// Update an existing rule
-app.put('/api/rules/:ruleId', (req, res) => {
-    const ruleId = parseInt(req.params.ruleId, 10);
-    const rules = loadRules();
-    const updatedRule = req.body;
-    const ruleIndex = rules.findIndex((rule) => rule.id === ruleId);
+// MongoDB models
+const Rule = mongoose.model('Rule', ruleSchema);
+const Log = mongoose.model('Log', logSchema);
 
-    if (ruleIndex !== -1) {
-        rules[ruleIndex] = { ...rules[ruleIndex], ...updatedRule };
-        saveRules(rules);
-        res.json(rules[ruleIndex]);
-    } else {
-        res.status(404).json({ error: 'Rule not found' });
+// Get all rules from MongoDB
+app.get('/api/rules', async (req, res) => {
+    try {
+        const rules = await Rule.find();
+        res.json(rules);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch rules' });
     }
 });
 
-// Delete a rule
-app.delete('/api/rules/:ruleId', (req, res) => {
-    const ruleId = parseInt(req.params.ruleId, 10);
-    let rules = loadRules();
-
-    // Filter out the rule to delete
-    rules = rules.filter((rule) => rule.id !== ruleId);
-
-    // Renumber remaining rules
-    rules = rules.map((rule, index) => ({ ...rule, id: index + 1 }));
-
-    saveRules(rules);
-    res.status(204).send();
+// Add a new rule to MongoDB
+app.post('/api/rules', async (req, res) => {
+    try {
+        const latestRule = await Rule.find().sort({ id: -1 }).limit(1);
+        const newId = latestRule.length > 0 ? latestRule[0].id + 1 : 1;
+        const newRule = new Rule({ ...req.body, id: newId });
+        await newRule.save();
+        res.status(201).json(newRule);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to add rule' });
+    }
 });
 
-// Get all logs
-app.get('/api/logs', (req, res) => {
-    const logs = loadLogs();
-    res.json(logs);
+
+// Update an existing rule in MongoDB
+app.put('/api/rules/:ruleId', async (req, res) => {
+    const { ruleId } = req.params;
+    try {
+        const updatedRule = await Rule.findByIdAndUpdate(ruleId, req.body, { new: true });
+        if (!updatedRule) {
+            return res.status(404).json({ error: 'Rule not found' });
+        }
+        res.json(updatedRule);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to update rule' });
+    }
+});
+
+// Delete a rule from MongoDB
+app.delete('/api/rules/:ruleId', async (req, res) => {
+    const { ruleId } = req.params;
+    try {
+        const deletedRule = await Rule.findByIdAndDelete(ruleId);
+        if (!deletedRule) {
+            return res.status(404).json({ error: 'Rule not found' });
+        }
+        res.status(204).send();
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to delete rule' });
+    }
+});
+
+// Get all logs from MongoDB
+app.get('/api/logs', async (req, res) => {
+    try {
+        const logs = await Log.find();
+        res.json(logs);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch logs' });
+    }
 });
 
 // Start the server
