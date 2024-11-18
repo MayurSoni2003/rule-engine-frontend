@@ -1,0 +1,71 @@
+/* Logs.css */
+
+/* Container for the logs table */
+.logs-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+.logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
+    text-align: left;
+}
+
+.logs-table th,
+.logs-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+/* Header Styling */
+.logs-table th {
+    background-color: #4caf50;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Table Row Styling */
+.logs-table tbody tr {
+    background-color: #f9f9f9;
+}
+
+.logs-table tbody tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+/* Hover Effect for Table Rows */
+.logs-table tbody tr:hover {
+    background-color: #e2f7e3;
+    cursor: pointer;
+}
+
+/* Styling for the empty row when no logs are available */
+.logs-table tbody tr td {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+}
+
+/* Styling for Log ID column */
+.logs-table td:first-child {
+    font-weight: bold;
+    color: #4caf50;
+}
+
+/* Header and Table container styling */
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}

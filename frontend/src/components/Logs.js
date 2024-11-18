@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './css/Logs.css'; // Assuming you will create a separate CSS file for styling
 
 const Logs = () => {
     const [logData, setLogData] = useState([]);
@@ -40,9 +41,9 @@ const Logs = () => {
     }, []);
 
     return (
-        <div>
+        <div className="logs-container">
             <h2>Logs</h2>
-            <table border="1" style={{ width: '100%', marginTop: '20px', borderCollapse: 'collapse' }}>
+            <table className="logs-table">
                 <thead>
                     <tr>
                         <th>Log ID</th>
