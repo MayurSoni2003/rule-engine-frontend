@@ -1,4 +1,3 @@
-// src/components/RuleForm.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -10,7 +9,8 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
     const [protocol, setProtocol] = useState('');
     const [action, setAction] = useState('DENY');
 
-    // Reset form fields after adding/editing a rule
+    const [errors, setErrors] = useState({}); // Track field errors
+
     const resetForm = () => {
         setSourceIp('');
         setDestinationIp('');
@@ -18,9 +18,9 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
         setDestinationPort('');
         setProtocol('');
         setAction('DENY');
+        setErrors({});
     };
 
-    // If an existing rule is being edited, set the fields to its values
     useEffect(() => {
         if (editingRule) {
             setSourceIp(editingRule.source_ip);
@@ -29,14 +29,36 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
             setDestinationPort(editingRule.destination_port);
             setProtocol(editingRule.protocol);
             setAction(editingRule.action);
-
-            // Scroll to the top of the page when editing a rule
             window.scrollTo(0, 0);
         }
     }, [editingRule]);
 
+    const validateIP = (ip) => {
+        const ipRegex = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$/;
+        return ipRegex.test(ip);
+    };
+
+    const validatePort = (port) => {
+        const portNumber = parseInt(port, 10);
+        return Number.isInteger(portNumber) && portNumber >= 1 && portNumber <= 65535;
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!validateIP(source_ip)) newErrors.source_ip = 'Invalid Source IP address.';
+        if (!validateIP(destination_ip)) newErrors.destination_ip = 'Invalid Destination IP address.';
+        if (!validatePort(source_port)) newErrors.source_port = 'Invalid Source Port (1-65535).';
+        if (!validatePort(destination_port)) newErrors.destination_port = 'Invalid Destination Port (1-65535).';
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0; // Return true if no errors
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!validateForm()) return; // Stop submission if validation fails
 
         const newRule = {
             source_ip,
@@ -48,24 +70,22 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
         };
 
         if (editingRule) {
-            // Update existing rule if being edited
             axios
                 .put(`http://localhost:5000/api/rules/${editingRule.id}`, newRule)
                 .then(() => {
                     setMessage('Rule updated successfully');
-                    setEditingRule(null);  // Clear editing state
-                    resetForm();  // Reset the form after submission
+                    setEditingRule(null);
+                    resetForm();
                 })
                 .catch(() => {
                     setMessage('Error updating rule');
                 });
         } else {
-            // Add a new rule
             axios
                 .post('http://localhost:5000/api/rules', newRule)
                 .then(() => {
                     setMessage('Rule added successfully');
-                    resetForm();  // Reset the form after submission
+                    resetForm();
                 })
                 .catch(() => {
                     setMessage('Error adding rule');
@@ -74,7 +94,6 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
     };
 
     const handleCancel = () => {
-        // Reset the form and exit edit mode
         setEditingRule(null);
         resetForm();
     };
@@ -90,6 +109,7 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
                         value={source_ip}
                         onChange={(e) => setSourceIp(e.target.value)}
                     />
+                    {errors.source_ip && <p className="error-message">{errors.source_ip}</p>}
                 </div>
                 <div className="form-group">
                     <label>Destination IP:</label>
@@ -98,6 +118,7 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
                         value={destination_ip}
                         onChange={(e) => setDestinationIp(e.target.value)}
                     />
+                    {errors.destination_ip && <p className="error-message">{errors.destination_ip}</p>}
                 </div>
                 <div className="form-group">
                     <label>Source Port:</label>
@@ -106,6 +127,7 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
                         value={source_port}
                         onChange={(e) => setSourcePort(e.target.value)}
                     />
+                    {errors.source_port && <p className="error-message">{errors.source_port}</p>}
                 </div>
                 <div className="form-group">
                     <label>Destination Port:</label>
@@ -114,6 +136,7 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
                         value={destination_port}
                         onChange={(e) => setDestinationPort(e.target.value)}
                     />
+                    {errors.destination_port && <p className="error-message">{errors.destination_port}</p>}
                 </div>
                 <div className="form-group">
                     <label>Protocol:</label>
@@ -121,10 +144,11 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
                         value={protocol}
                         onChange={(e) => setProtocol(e.target.value)}
                     >
-                        <option value="any">Any</option>
-                        <option value="tcp">TCP</option>
-                        <option value="udp">UDP</option>
-                        <option value="icmp">ICMP</option>
+                        <option value="Any">Any</option>
+                        <option value="TCP">TCP</option>
+                        <option value="UDP">UDP</option>
+                        <option value="ICMP">ICMP</option>
+                        <option value="ARP">ARP</option>
                     </select>
                 </div>
                 <div className="form-group">
@@ -135,6 +159,7 @@ function RuleForm({ editingRule, setEditingRule, setMessage }) {
                     >
                         <option value="DENY">Deny</option>
                         <option value="ALLOW">Allow</option>
+                        <option value="MAIL">Mail</option>
                     </select>
                 </div>
                 <div className="form-actions">

@@ -1,29 +1,20 @@
 [
     {
         "action": "ALLOW",
-        "destination_ip": "85.322",
+        "destination_ip": "192.168.10.2",
         "destination_port": "585",
         "id": 1,
-        "protocol": "udp",
-        "source_ip": "75.212.45.78",
+        "protocol": "Any",
+        "source_ip": "75.212.45.178",
         "source_port": "2555"
     },
     {
-        "source_ip": "e324",
-        "destination_ip": "234",
-        "source_port": "234",
-        "destination_port": "234",
-        "protocol": "",
-        "action": "DENY",
-        "id": 2
-    },
-    {
-        "source_ip": "234",
-        "destination_ip": "432",
-        "source_port": "234",
-        "destination_port": "432",
-        "protocol": "udp",
+        "source_ip": "192.168.10.230",
+        "destination_ip": "142.250.194.142",
+        "source_port": "80",
+        "destination_port": "443",
+        "protocol": "TCP",
         "action": "ALLOW",
-        "id": 3
+        "id": 2
     }
 ]

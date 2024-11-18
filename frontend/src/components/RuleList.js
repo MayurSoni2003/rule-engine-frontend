@@ -58,7 +58,7 @@ function RuleList() {
                     </div>
                 ))}
             </div>
-            {message && <p className="error-message">{message}</p>}
+            {message && <p className={message.includes('successfully') ? 'success-message' : 'error-message'}>{message}</p>}
         </div>
     );
 }
