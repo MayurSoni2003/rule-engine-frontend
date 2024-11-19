@@ -40,9 +40,9 @@ function RuleList() {
 
             <div className="rules-list">
                 {rules.length === 0 && <p>No rules available</p>}
-                {rules.map(rule => (
-                    <div key={rule._id} className="card">
-                        <div className="card-header">{`Rule #${rule._id}`}</div>
+                {rules.map((rule, idx) => (
+                    <div key={idx} className="card">
+                        <div className="card-header">{`Rule #${idx + 1}`}</div>
                         <div className="card-content">
                             <p><strong>Source IP:</strong> {rule.source_ip}</p>
                             <p><strong>Destination IP:</strong> {rule.destination_ip}</p>
